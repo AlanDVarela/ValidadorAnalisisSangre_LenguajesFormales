@@ -3,22 +3,21 @@ from lexer import lexer, tokens
 
 
 # Definición de las funciones asociadas con las reglas de producción
-# --- REGLA INICIAL ---
+# regla inicial
 def p_inicio(p):
     '''inicio : objeto'''
     p[0] = p[1]
 
-# --- ESTRUCTURA DE OBJETOS { } ---
+# objetos { miembros }
 def p_objeto(p):
-    '''objeto : LBRACE miembros RBRACE
-              | LBRACE RBRACE'''
-    if len(p) == 4:
-        p[0] = p[2]
-    else:
-        p[0] = {}
+    '''objeto : LBRACE miembros RBRACE'''
+    p[0] = p[2]
 
+# miembros {'folio': '123456' }
+# miembros recursivo { 'folio': '123456', 'fecha_toma': '14/06/2020 07:51:57'}
 def p_miembros(p):
-    '''miembros : par
+    #par ej = {'folio': '123456' }
+    '''miembros : par 
                 | miembros COMMA par'''
     if len(p) == 2:
         p[0] = p[1]
@@ -26,12 +25,12 @@ def p_miembros(p):
         p[1].update(p[3])
         p[0] = p[1]
 
-# --- PAR CLAVE: VALOR ---
+# PAR {'clave' : 'valor'}
 def p_par(p):
     '''par : clave COLON valor'''
-    p[0] = {p[1]: p[3]}
+    p[0] = {p[1]: p[3]} #dict
 
-# Esta regla permite que las palabras reservadas funcionen como claves
+# Palabras reservadas (No terminales)
 def p_clave(p):
     '''clave : FOLIO
              | FECHA_TOMA
@@ -47,20 +46,17 @@ def p_clave(p):
              | RESULTADO
              | UNIDAD
              | LIMITE
+             | NOTA
              | FIRMA
              | RESPONSABLE
              | CEDULA
-             | STRING'''  
+             '''  
     p[0] = p[1]
 
-# --- ESTRUCTURA DE LISTAS [ ] ---
+# Lista []
 def p_lista(p):
-    '''lista : LBRACKET elementos RBRACKET
-             | LBRACKET RBRACKET'''
-    if len(p) == 4:
-        p[0] = p[2]
-    else:
-        p[0] = []
+    '''lista : LBRACKET elementos RBRACKET'''
+    p[0] = p[2]
 
 def p_elementos(p):
     '''elementos : valor
@@ -71,7 +67,7 @@ def p_elementos(p):
         p[1].append(p[3])
         p[0] = p[1]
 
-# --- VALORES POSIBLES ---
+# Valores 
 def p_valor(p):
     '''valor : STRING
              | NUMBER

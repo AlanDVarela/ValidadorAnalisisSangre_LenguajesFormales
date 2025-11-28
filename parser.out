@@ -5,82 +5,81 @@ Grammar
 Rule 0     S' -> inicio
 Rule 1     inicio -> objeto
 Rule 2     objeto -> LBRACE miembros RBRACE
-Rule 3     objeto -> LBRACE RBRACE
-Rule 4     miembros -> par
-Rule 5     miembros -> miembros COMMA par
-Rule 6     par -> clave COLON valor
-Rule 7     clave -> FOLIO
-Rule 8     clave -> FECHA_TOMA
-Rule 9     clave -> FECHA_VALIDACION
-Rule 10    clave -> PACIENTE
-Rule 11    clave -> NOMBRE
-Rule 12    clave -> FECHA_NAC
-Rule 13    clave -> SEXO
-Rule 14    clave -> EDAD
-Rule 15    clave -> MEDICO
-Rule 16    clave -> SECCION
-Rule 17    clave -> PARAMETROS
-Rule 18    clave -> RESULTADO
-Rule 19    clave -> UNIDAD
-Rule 20    clave -> LIMITE
+Rule 3     miembros -> par
+Rule 4     miembros -> miembros COMMA par
+Rule 5     par -> clave COLON valor
+Rule 6     clave -> FOLIO
+Rule 7     clave -> FECHA_TOMA
+Rule 8     clave -> FECHA_VALIDACION
+Rule 9     clave -> PACIENTE
+Rule 10    clave -> NOMBRE
+Rule 11    clave -> FECHA_NAC
+Rule 12    clave -> SEXO
+Rule 13    clave -> EDAD
+Rule 14    clave -> MEDICO
+Rule 15    clave -> SECCION
+Rule 16    clave -> PARAMETROS
+Rule 17    clave -> RESULTADO
+Rule 18    clave -> UNIDAD
+Rule 19    clave -> LIMITE
+Rule 20    clave -> NOTA
 Rule 21    clave -> FIRMA
 Rule 22    clave -> RESPONSABLE
 Rule 23    clave -> CEDULA
-Rule 24    clave -> STRING
-Rule 25    lista -> LBRACKET elementos RBRACKET
-Rule 26    lista -> LBRACKET RBRACKET
-Rule 27    elementos -> valor
-Rule 28    elementos -> elementos COMMA valor
-Rule 29    valor -> STRING
-Rule 30    valor -> NUMBER
-Rule 31    valor -> FECHA
-Rule 32    valor -> FECHA_HORA
-Rule 33    valor -> CARACTER
-Rule 34    valor -> objeto
-Rule 35    valor -> lista
+Rule 24    lista -> LBRACKET elementos RBRACKET
+Rule 25    elementos -> valor
+Rule 26    elementos -> elementos COMMA valor
+Rule 27    valor -> STRING
+Rule 28    valor -> NUMBER
+Rule 29    valor -> FECHA
+Rule 30    valor -> FECHA_HORA
+Rule 31    valor -> CARACTER
+Rule 32    valor -> objeto
+Rule 33    valor -> lista
 
 Terminals, with rules where they appear
 
-CARACTER             : 33
+CARACTER             : 31
 CEDULA               : 23
-COLON                : 6
-COMMA                : 5 28
-EDAD                 : 14
-FECHA                : 31
-FECHA_HORA           : 32
-FECHA_NAC            : 12
-FECHA_TOMA           : 8
-FECHA_VALIDACION     : 9
+COLON                : 5
+COMMA                : 4 26
+EDAD                 : 13
+FECHA                : 29
+FECHA_HORA           : 30
+FECHA_NAC            : 11
+FECHA_TOMA           : 7
+FECHA_VALIDACION     : 8
 FIRMA                : 21
-FOLIO                : 7
-LBRACE               : 2 3
-LBRACKET             : 25 26
-LIMITE               : 20
-MEDICO               : 15
-NOMBRE               : 11
-NUMBER               : 30
-PACIENTE             : 10
-PARAMETROS           : 17
-RBRACE               : 2 3
-RBRACKET             : 25 26
+FOLIO                : 6
+LBRACE               : 2
+LBRACKET             : 24
+LIMITE               : 19
+MEDICO               : 14
+NOMBRE               : 10
+NOTA                 : 20
+NUMBER               : 28
+PACIENTE             : 9
+PARAMETROS           : 16
+RBRACE               : 2
+RBRACKET             : 24
 RESPONSABLE          : 22
-RESULTADO            : 18
-SECCION              : 16
-SEXO                 : 13
-STRING               : 24 29
-UNIDAD               : 19
+RESULTADO            : 17
+SECCION              : 15
+SEXO                 : 12
+STRING               : 27
+UNIDAD               : 18
 error                : 
 
 Nonterminals, with rules where they appear
 
-clave                : 6
-elementos            : 25 28
+clave                : 5
+elementos            : 24 26
 inicio               : 0
-lista                : 35
-miembros             : 2 5
-objeto               : 1 34
-par                  : 4 5
-valor                : 6 27 28
+lista                : 33
+miembros             : 2 4
+objeto               : 1 32
+par                  : 3 4
+valor                : 5 25 26
 
 Parsing method: LALR
 
@@ -89,7 +88,6 @@ state 0
     (0) S' -> . inicio
     (1) inicio -> . objeto
     (2) objeto -> . LBRACE miembros RBRACE
-    (3) objeto -> . LBRACE RBRACE
 
     LBRACE          shift and go to state 3
 
@@ -112,183 +110,178 @@ state 2
 state 3
 
     (2) objeto -> LBRACE . miembros RBRACE
-    (3) objeto -> LBRACE . RBRACE
-    (4) miembros -> . par
-    (5) miembros -> . miembros COMMA par
-    (6) par -> . clave COLON valor
-    (7) clave -> . FOLIO
-    (8) clave -> . FECHA_TOMA
-    (9) clave -> . FECHA_VALIDACION
-    (10) clave -> . PACIENTE
-    (11) clave -> . NOMBRE
-    (12) clave -> . FECHA_NAC
-    (13) clave -> . SEXO
-    (14) clave -> . EDAD
-    (15) clave -> . MEDICO
-    (16) clave -> . SECCION
-    (17) clave -> . PARAMETROS
-    (18) clave -> . RESULTADO
-    (19) clave -> . UNIDAD
-    (20) clave -> . LIMITE
+    (3) miembros -> . par
+    (4) miembros -> . miembros COMMA par
+    (5) par -> . clave COLON valor
+    (6) clave -> . FOLIO
+    (7) clave -> . FECHA_TOMA
+    (8) clave -> . FECHA_VALIDACION
+    (9) clave -> . PACIENTE
+    (10) clave -> . NOMBRE
+    (11) clave -> . FECHA_NAC
+    (12) clave -> . SEXO
+    (13) clave -> . EDAD
+    (14) clave -> . MEDICO
+    (15) clave -> . SECCION
+    (16) clave -> . PARAMETROS
+    (17) clave -> . RESULTADO
+    (18) clave -> . UNIDAD
+    (19) clave -> . LIMITE
+    (20) clave -> . NOTA
     (21) clave -> . FIRMA
     (22) clave -> . RESPONSABLE
     (23) clave -> . CEDULA
-    (24) clave -> . STRING
 
-    RBRACE          shift and go to state 5
-    FOLIO           shift and go to state 8
-    FECHA_TOMA      shift and go to state 9
-    FECHA_VALIDACION shift and go to state 10
-    PACIENTE        shift and go to state 11
-    NOMBRE          shift and go to state 12
-    FECHA_NAC       shift and go to state 13
-    SEXO            shift and go to state 14
-    EDAD            shift and go to state 15
-    MEDICO          shift and go to state 16
-    SECCION         shift and go to state 17
-    PARAMETROS      shift and go to state 18
-    RESULTADO       shift and go to state 19
-    UNIDAD          shift and go to state 20
-    LIMITE          shift and go to state 21
+    FOLIO           shift and go to state 7
+    FECHA_TOMA      shift and go to state 8
+    FECHA_VALIDACION shift and go to state 9
+    PACIENTE        shift and go to state 10
+    NOMBRE          shift and go to state 11
+    FECHA_NAC       shift and go to state 12
+    SEXO            shift and go to state 13
+    EDAD            shift and go to state 14
+    MEDICO          shift and go to state 15
+    SECCION         shift and go to state 16
+    PARAMETROS      shift and go to state 17
+    RESULTADO       shift and go to state 18
+    UNIDAD          shift and go to state 19
+    LIMITE          shift and go to state 20
+    NOTA            shift and go to state 21
     FIRMA           shift and go to state 22
     RESPONSABLE     shift and go to state 23
     CEDULA          shift and go to state 24
-    STRING          shift and go to state 25
 
     miembros                       shift and go to state 4
-    par                            shift and go to state 6
-    clave                          shift and go to state 7
+    par                            shift and go to state 5
+    clave                          shift and go to state 6
 
 state 4
 
     (2) objeto -> LBRACE miembros . RBRACE
-    (5) miembros -> miembros . COMMA par
+    (4) miembros -> miembros . COMMA par
 
-    RBRACE          shift and go to state 26
-    COMMA           shift and go to state 27
+    RBRACE          shift and go to state 25
+    COMMA           shift and go to state 26
 
 
 state 5
 
-    (3) objeto -> LBRACE RBRACE .
+    (3) miembros -> par .
 
-    $end            reduce using rule 3 (objeto -> LBRACE RBRACE .)
-    RBRACE          reduce using rule 3 (objeto -> LBRACE RBRACE .)
-    COMMA           reduce using rule 3 (objeto -> LBRACE RBRACE .)
-    RBRACKET        reduce using rule 3 (objeto -> LBRACE RBRACE .)
+    RBRACE          reduce using rule 3 (miembros -> par .)
+    COMMA           reduce using rule 3 (miembros -> par .)
 
 
 state 6
 
-    (4) miembros -> par .
+    (5) par -> clave . COLON valor
 
-    RBRACE          reduce using rule 4 (miembros -> par .)
-    COMMA           reduce using rule 4 (miembros -> par .)
+    COLON           shift and go to state 27
 
 
 state 7
 
-    (6) par -> clave . COLON valor
+    (6) clave -> FOLIO .
 
-    COLON           shift and go to state 28
+    COLON           reduce using rule 6 (clave -> FOLIO .)
 
 
 state 8
 
-    (7) clave -> FOLIO .
+    (7) clave -> FECHA_TOMA .
 
-    COLON           reduce using rule 7 (clave -> FOLIO .)
+    COLON           reduce using rule 7 (clave -> FECHA_TOMA .)
 
 
 state 9
 
-    (8) clave -> FECHA_TOMA .
+    (8) clave -> FECHA_VALIDACION .
 
-    COLON           reduce using rule 8 (clave -> FECHA_TOMA .)
+    COLON           reduce using rule 8 (clave -> FECHA_VALIDACION .)
 
 
 state 10
 
-    (9) clave -> FECHA_VALIDACION .
+    (9) clave -> PACIENTE .
 
-    COLON           reduce using rule 9 (clave -> FECHA_VALIDACION .)
+    COLON           reduce using rule 9 (clave -> PACIENTE .)
 
 
 state 11
 
-    (10) clave -> PACIENTE .
+    (10) clave -> NOMBRE .
 
-    COLON           reduce using rule 10 (clave -> PACIENTE .)
+    COLON           reduce using rule 10 (clave -> NOMBRE .)
 
 
 state 12
 
-    (11) clave -> NOMBRE .
+    (11) clave -> FECHA_NAC .
 
-    COLON           reduce using rule 11 (clave -> NOMBRE .)
+    COLON           reduce using rule 11 (clave -> FECHA_NAC .)
 
 
 state 13
 
-    (12) clave -> FECHA_NAC .
+    (12) clave -> SEXO .
 
-    COLON           reduce using rule 12 (clave -> FECHA_NAC .)
+    COLON           reduce using rule 12 (clave -> SEXO .)
 
 
 state 14
 
-    (13) clave -> SEXO .
+    (13) clave -> EDAD .
 
-    COLON           reduce using rule 13 (clave -> SEXO .)
+    COLON           reduce using rule 13 (clave -> EDAD .)
 
 
 state 15
 
-    (14) clave -> EDAD .
+    (14) clave -> MEDICO .
 
-    COLON           reduce using rule 14 (clave -> EDAD .)
+    COLON           reduce using rule 14 (clave -> MEDICO .)
 
 
 state 16
 
-    (15) clave -> MEDICO .
+    (15) clave -> SECCION .
 
-    COLON           reduce using rule 15 (clave -> MEDICO .)
+    COLON           reduce using rule 15 (clave -> SECCION .)
 
 
 state 17
 
-    (16) clave -> SECCION .
+    (16) clave -> PARAMETROS .
 
-    COLON           reduce using rule 16 (clave -> SECCION .)
+    COLON           reduce using rule 16 (clave -> PARAMETROS .)
 
 
 state 18
 
-    (17) clave -> PARAMETROS .
+    (17) clave -> RESULTADO .
 
-    COLON           reduce using rule 17 (clave -> PARAMETROS .)
+    COLON           reduce using rule 17 (clave -> RESULTADO .)
 
 
 state 19
 
-    (18) clave -> RESULTADO .
+    (18) clave -> UNIDAD .
 
-    COLON           reduce using rule 18 (clave -> RESULTADO .)
+    COLON           reduce using rule 18 (clave -> UNIDAD .)
 
 
 state 20
 
-    (19) clave -> UNIDAD .
+    (19) clave -> LIMITE .
 
-    COLON           reduce using rule 19 (clave -> UNIDAD .)
+    COLON           reduce using rule 19 (clave -> LIMITE .)
 
 
 state 21
 
-    (20) clave -> LIMITE .
+    (20) clave -> NOTA .
 
-    COLON           reduce using rule 20 (clave -> LIMITE .)
+    COLON           reduce using rule 20 (clave -> NOTA .)
 
 
 state 22
@@ -314,13 +307,6 @@ state 24
 
 state 25
 
-    (24) clave -> STRING .
-
-    COLON           reduce using rule 24 (clave -> STRING .)
-
-
-state 26
-
     (2) objeto -> LBRACE miembros RBRACE .
 
     $end            reduce using rule 2 (objeto -> LBRACE miembros RBRACE .)
@@ -329,255 +315,238 @@ state 26
     RBRACKET        reduce using rule 2 (objeto -> LBRACE miembros RBRACE .)
 
 
-state 27
+state 26
 
-    (5) miembros -> miembros COMMA . par
-    (6) par -> . clave COLON valor
-    (7) clave -> . FOLIO
-    (8) clave -> . FECHA_TOMA
-    (9) clave -> . FECHA_VALIDACION
-    (10) clave -> . PACIENTE
-    (11) clave -> . NOMBRE
-    (12) clave -> . FECHA_NAC
-    (13) clave -> . SEXO
-    (14) clave -> . EDAD
-    (15) clave -> . MEDICO
-    (16) clave -> . SECCION
-    (17) clave -> . PARAMETROS
-    (18) clave -> . RESULTADO
-    (19) clave -> . UNIDAD
-    (20) clave -> . LIMITE
+    (4) miembros -> miembros COMMA . par
+    (5) par -> . clave COLON valor
+    (6) clave -> . FOLIO
+    (7) clave -> . FECHA_TOMA
+    (8) clave -> . FECHA_VALIDACION
+    (9) clave -> . PACIENTE
+    (10) clave -> . NOMBRE
+    (11) clave -> . FECHA_NAC
+    (12) clave -> . SEXO
+    (13) clave -> . EDAD
+    (14) clave -> . MEDICO
+    (15) clave -> . SECCION
+    (16) clave -> . PARAMETROS
+    (17) clave -> . RESULTADO
+    (18) clave -> . UNIDAD
+    (19) clave -> . LIMITE
+    (20) clave -> . NOTA
     (21) clave -> . FIRMA
     (22) clave -> . RESPONSABLE
     (23) clave -> . CEDULA
-    (24) clave -> . STRING
 
-    FOLIO           shift and go to state 8
-    FECHA_TOMA      shift and go to state 9
-    FECHA_VALIDACION shift and go to state 10
-    PACIENTE        shift and go to state 11
-    NOMBRE          shift and go to state 12
-    FECHA_NAC       shift and go to state 13
-    SEXO            shift and go to state 14
-    EDAD            shift and go to state 15
-    MEDICO          shift and go to state 16
-    SECCION         shift and go to state 17
-    PARAMETROS      shift and go to state 18
-    RESULTADO       shift and go to state 19
-    UNIDAD          shift and go to state 20
-    LIMITE          shift and go to state 21
+    FOLIO           shift and go to state 7
+    FECHA_TOMA      shift and go to state 8
+    FECHA_VALIDACION shift and go to state 9
+    PACIENTE        shift and go to state 10
+    NOMBRE          shift and go to state 11
+    FECHA_NAC       shift and go to state 12
+    SEXO            shift and go to state 13
+    EDAD            shift and go to state 14
+    MEDICO          shift and go to state 15
+    SECCION         shift and go to state 16
+    PARAMETROS      shift and go to state 17
+    RESULTADO       shift and go to state 18
+    UNIDAD          shift and go to state 19
+    LIMITE          shift and go to state 20
+    NOTA            shift and go to state 21
     FIRMA           shift and go to state 22
     RESPONSABLE     shift and go to state 23
     CEDULA          shift and go to state 24
-    STRING          shift and go to state 25
 
-    par                            shift and go to state 29
-    clave                          shift and go to state 7
+    par                            shift and go to state 28
+    clave                          shift and go to state 6
+
+state 27
+
+    (5) par -> clave COLON . valor
+    (27) valor -> . STRING
+    (28) valor -> . NUMBER
+    (29) valor -> . FECHA
+    (30) valor -> . FECHA_HORA
+    (31) valor -> . CARACTER
+    (32) valor -> . objeto
+    (33) valor -> . lista
+    (2) objeto -> . LBRACE miembros RBRACE
+    (24) lista -> . LBRACKET elementos RBRACKET
+
+    STRING          shift and go to state 30
+    NUMBER          shift and go to state 31
+    FECHA           shift and go to state 32
+    FECHA_HORA      shift and go to state 33
+    CARACTER        shift and go to state 34
+    LBRACE          shift and go to state 3
+    LBRACKET        shift and go to state 37
+
+    valor                          shift and go to state 29
+    objeto                         shift and go to state 35
+    lista                          shift and go to state 36
 
 state 28
 
-    (6) par -> clave COLON . valor
-    (29) valor -> . STRING
-    (30) valor -> . NUMBER
-    (31) valor -> . FECHA
-    (32) valor -> . FECHA_HORA
-    (33) valor -> . CARACTER
-    (34) valor -> . objeto
-    (35) valor -> . lista
-    (2) objeto -> . LBRACE miembros RBRACE
-    (3) objeto -> . LBRACE RBRACE
-    (25) lista -> . LBRACKET elementos RBRACKET
-    (26) lista -> . LBRACKET RBRACKET
+    (4) miembros -> miembros COMMA par .
 
-    STRING          shift and go to state 31
-    NUMBER          shift and go to state 32
-    FECHA           shift and go to state 33
-    FECHA_HORA      shift and go to state 34
-    CARACTER        shift and go to state 35
-    LBRACE          shift and go to state 3
-    LBRACKET        shift and go to state 38
+    RBRACE          reduce using rule 4 (miembros -> miembros COMMA par .)
+    COMMA           reduce using rule 4 (miembros -> miembros COMMA par .)
 
-    valor                          shift and go to state 30
-    objeto                         shift and go to state 36
-    lista                          shift and go to state 37
 
 state 29
 
-    (5) miembros -> miembros COMMA par .
+    (5) par -> clave COLON valor .
 
-    RBRACE          reduce using rule 5 (miembros -> miembros COMMA par .)
-    COMMA           reduce using rule 5 (miembros -> miembros COMMA par .)
+    RBRACE          reduce using rule 5 (par -> clave COLON valor .)
+    COMMA           reduce using rule 5 (par -> clave COLON valor .)
 
 
 state 30
 
-    (6) par -> clave COLON valor .
+    (27) valor -> STRING .
 
-    RBRACE          reduce using rule 6 (par -> clave COLON valor .)
-    COMMA           reduce using rule 6 (par -> clave COLON valor .)
+    RBRACE          reduce using rule 27 (valor -> STRING .)
+    COMMA           reduce using rule 27 (valor -> STRING .)
+    RBRACKET        reduce using rule 27 (valor -> STRING .)
 
 
 state 31
 
-    (29) valor -> STRING .
+    (28) valor -> NUMBER .
 
-    RBRACE          reduce using rule 29 (valor -> STRING .)
-    COMMA           reduce using rule 29 (valor -> STRING .)
-    RBRACKET        reduce using rule 29 (valor -> STRING .)
+    RBRACE          reduce using rule 28 (valor -> NUMBER .)
+    COMMA           reduce using rule 28 (valor -> NUMBER .)
+    RBRACKET        reduce using rule 28 (valor -> NUMBER .)
 
 
 state 32
 
-    (30) valor -> NUMBER .
+    (29) valor -> FECHA .
 
-    RBRACE          reduce using rule 30 (valor -> NUMBER .)
-    COMMA           reduce using rule 30 (valor -> NUMBER .)
-    RBRACKET        reduce using rule 30 (valor -> NUMBER .)
+    RBRACE          reduce using rule 29 (valor -> FECHA .)
+    COMMA           reduce using rule 29 (valor -> FECHA .)
+    RBRACKET        reduce using rule 29 (valor -> FECHA .)
 
 
 state 33
 
-    (31) valor -> FECHA .
+    (30) valor -> FECHA_HORA .
 
-    RBRACE          reduce using rule 31 (valor -> FECHA .)
-    COMMA           reduce using rule 31 (valor -> FECHA .)
-    RBRACKET        reduce using rule 31 (valor -> FECHA .)
+    RBRACE          reduce using rule 30 (valor -> FECHA_HORA .)
+    COMMA           reduce using rule 30 (valor -> FECHA_HORA .)
+    RBRACKET        reduce using rule 30 (valor -> FECHA_HORA .)
 
 
 state 34
 
-    (32) valor -> FECHA_HORA .
+    (31) valor -> CARACTER .
 
-    RBRACE          reduce using rule 32 (valor -> FECHA_HORA .)
-    COMMA           reduce using rule 32 (valor -> FECHA_HORA .)
-    RBRACKET        reduce using rule 32 (valor -> FECHA_HORA .)
+    RBRACE          reduce using rule 31 (valor -> CARACTER .)
+    COMMA           reduce using rule 31 (valor -> CARACTER .)
+    RBRACKET        reduce using rule 31 (valor -> CARACTER .)
 
 
 state 35
 
-    (33) valor -> CARACTER .
+    (32) valor -> objeto .
 
-    RBRACE          reduce using rule 33 (valor -> CARACTER .)
-    COMMA           reduce using rule 33 (valor -> CARACTER .)
-    RBRACKET        reduce using rule 33 (valor -> CARACTER .)
+    RBRACE          reduce using rule 32 (valor -> objeto .)
+    COMMA           reduce using rule 32 (valor -> objeto .)
+    RBRACKET        reduce using rule 32 (valor -> objeto .)
 
 
 state 36
 
-    (34) valor -> objeto .
+    (33) valor -> lista .
 
-    RBRACE          reduce using rule 34 (valor -> objeto .)
-    COMMA           reduce using rule 34 (valor -> objeto .)
-    RBRACKET        reduce using rule 34 (valor -> objeto .)
+    RBRACE          reduce using rule 33 (valor -> lista .)
+    COMMA           reduce using rule 33 (valor -> lista .)
+    RBRACKET        reduce using rule 33 (valor -> lista .)
 
 
 state 37
 
-    (35) valor -> lista .
+    (24) lista -> LBRACKET . elementos RBRACKET
+    (25) elementos -> . valor
+    (26) elementos -> . elementos COMMA valor
+    (27) valor -> . STRING
+    (28) valor -> . NUMBER
+    (29) valor -> . FECHA
+    (30) valor -> . FECHA_HORA
+    (31) valor -> . CARACTER
+    (32) valor -> . objeto
+    (33) valor -> . lista
+    (2) objeto -> . LBRACE miembros RBRACE
+    (24) lista -> . LBRACKET elementos RBRACKET
 
-    RBRACE          reduce using rule 35 (valor -> lista .)
-    COMMA           reduce using rule 35 (valor -> lista .)
-    RBRACKET        reduce using rule 35 (valor -> lista .)
+    STRING          shift and go to state 30
+    NUMBER          shift and go to state 31
+    FECHA           shift and go to state 32
+    FECHA_HORA      shift and go to state 33
+    CARACTER        shift and go to state 34
+    LBRACE          shift and go to state 3
+    LBRACKET        shift and go to state 37
 
+    elementos                      shift and go to state 38
+    valor                          shift and go to state 39
+    objeto                         shift and go to state 35
+    lista                          shift and go to state 36
 
 state 38
 
-    (25) lista -> LBRACKET . elementos RBRACKET
-    (26) lista -> LBRACKET . RBRACKET
-    (27) elementos -> . valor
-    (28) elementos -> . elementos COMMA valor
-    (29) valor -> . STRING
-    (30) valor -> . NUMBER
-    (31) valor -> . FECHA
-    (32) valor -> . FECHA_HORA
-    (33) valor -> . CARACTER
-    (34) valor -> . objeto
-    (35) valor -> . lista
-    (2) objeto -> . LBRACE miembros RBRACE
-    (3) objeto -> . LBRACE RBRACE
-    (25) lista -> . LBRACKET elementos RBRACKET
-    (26) lista -> . LBRACKET RBRACKET
+    (24) lista -> LBRACKET elementos . RBRACKET
+    (26) elementos -> elementos . COMMA valor
 
     RBRACKET        shift and go to state 40
-    STRING          shift and go to state 31
-    NUMBER          shift and go to state 32
-    FECHA           shift and go to state 33
-    FECHA_HORA      shift and go to state 34
-    CARACTER        shift and go to state 35
-    LBRACE          shift and go to state 3
-    LBRACKET        shift and go to state 38
+    COMMA           shift and go to state 41
 
-    elementos                      shift and go to state 39
-    valor                          shift and go to state 41
-    objeto                         shift and go to state 36
-    lista                          shift and go to state 37
 
 state 39
 
-    (25) lista -> LBRACKET elementos . RBRACKET
-    (28) elementos -> elementos . COMMA valor
+    (25) elementos -> valor .
 
-    RBRACKET        shift and go to state 42
-    COMMA           shift and go to state 43
+    RBRACKET        reduce using rule 25 (elementos -> valor .)
+    COMMA           reduce using rule 25 (elementos -> valor .)
 
 
 state 40
 
-    (26) lista -> LBRACKET RBRACKET .
+    (24) lista -> LBRACKET elementos RBRACKET .
 
-    RBRACE          reduce using rule 26 (lista -> LBRACKET RBRACKET .)
-    COMMA           reduce using rule 26 (lista -> LBRACKET RBRACKET .)
-    RBRACKET        reduce using rule 26 (lista -> LBRACKET RBRACKET .)
+    RBRACE          reduce using rule 24 (lista -> LBRACKET elementos RBRACKET .)
+    COMMA           reduce using rule 24 (lista -> LBRACKET elementos RBRACKET .)
+    RBRACKET        reduce using rule 24 (lista -> LBRACKET elementos RBRACKET .)
 
 
 state 41
 
-    (27) elementos -> valor .
+    (26) elementos -> elementos COMMA . valor
+    (27) valor -> . STRING
+    (28) valor -> . NUMBER
+    (29) valor -> . FECHA
+    (30) valor -> . FECHA_HORA
+    (31) valor -> . CARACTER
+    (32) valor -> . objeto
+    (33) valor -> . lista
+    (2) objeto -> . LBRACE miembros RBRACE
+    (24) lista -> . LBRACKET elementos RBRACKET
 
-    RBRACKET        reduce using rule 27 (elementos -> valor .)
-    COMMA           reduce using rule 27 (elementos -> valor .)
+    STRING          shift and go to state 30
+    NUMBER          shift and go to state 31
+    FECHA           shift and go to state 32
+    FECHA_HORA      shift and go to state 33
+    CARACTER        shift and go to state 34
+    LBRACE          shift and go to state 3
+    LBRACKET        shift and go to state 37
 
+    valor                          shift and go to state 42
+    objeto                         shift and go to state 35
+    lista                          shift and go to state 36
 
 state 42
 
-    (25) lista -> LBRACKET elementos RBRACKET .
+    (26) elementos -> elementos COMMA valor .
 
-    RBRACE          reduce using rule 25 (lista -> LBRACKET elementos RBRACKET .)
-    COMMA           reduce using rule 25 (lista -> LBRACKET elementos RBRACKET .)
-    RBRACKET        reduce using rule 25 (lista -> LBRACKET elementos RBRACKET .)
-
-
-state 43
-
-    (28) elementos -> elementos COMMA . valor
-    (29) valor -> . STRING
-    (30) valor -> . NUMBER
-    (31) valor -> . FECHA
-    (32) valor -> . FECHA_HORA
-    (33) valor -> . CARACTER
-    (34) valor -> . objeto
-    (35) valor -> . lista
-    (2) objeto -> . LBRACE miembros RBRACE
-    (3) objeto -> . LBRACE RBRACE
-    (25) lista -> . LBRACKET elementos RBRACKET
-    (26) lista -> . LBRACKET RBRACKET
-
-    STRING          shift and go to state 31
-    NUMBER          shift and go to state 32
-    FECHA           shift and go to state 33
-    FECHA_HORA      shift and go to state 34
-    CARACTER        shift and go to state 35
-    LBRACE          shift and go to state 3
-    LBRACKET        shift and go to state 38
-
-    valor                          shift and go to state 44
-    objeto                         shift and go to state 36
-    lista                          shift and go to state 37
-
-state 44
-
-    (28) elementos -> elementos COMMA valor .
-
-    RBRACKET        reduce using rule 28 (elementos -> elementos COMMA valor .)
-    COMMA           reduce using rule 28 (elementos -> elementos COMMA valor .)
+    RBRACKET        reduce using rule 26 (elementos -> elementos COMMA valor .)
+    COMMA           reduce using rule 26 (elementos -> elementos COMMA valor .)
 

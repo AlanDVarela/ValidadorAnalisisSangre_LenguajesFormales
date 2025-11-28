@@ -170,4 +170,4 @@ def cargar_y_validar(nombre_archivo):
 # 3. EJECUCIÓN
 # ==========================================
 if __name__ == "__main__":
-    cargar_y_validar("reporte_hematologia_3.json")
+    cargar_y_validar("reporte_hematologia.json")

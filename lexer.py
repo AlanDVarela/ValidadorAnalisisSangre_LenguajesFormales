@@ -17,6 +17,7 @@ reserved = {
     'resultado': 'RESULTADO',
     'unidad': 'UNIDAD',
     'limite': 'LIMITE',
+    'nota': 'NOTA',
     'firma': 'FIRMA',
     'responsable': 'RESPONSABLE',
     'cedula': 'CEDULA'

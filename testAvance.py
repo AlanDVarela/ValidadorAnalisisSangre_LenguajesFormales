@@ -14,21 +14,57 @@ data2 = '''{
       }
     }''' # cadena de entrada
 
-data = '''{
-    "folio": "15502427",
-    "fecha_toma": "14/06/2020 07:51:57",
-    "paciente": {
-        "nombre": "Juan Perez",
-        "fecha_nacimiento": "25/04/1985",
-        "sexo": "M",
-        "edad": 35
+data = '''
+{
+  {
+  "folio": "15502427",
+  "fecha_toma": "14/06/2020 07:51:57",
+  "fecha_validacion": "14/06/2020 17:08:05",
+  "paciente": {
+    "nombre": "Ramírez Guzmán, María",
+    "fecha_nacimiento": "25/04/1985",
+    "sexo": "F",
+    "edad": 35
+  },
+  "medico_solicitante": "Dr. Rafael Barberá Vázquez",
+  "seccion": "Biometría Hemática",
+  "parametros": [
+    {
+      "nombre": "Leucocitos", 
+      "resultado": 5.9, 
+      "unidad": "10^3/µL",
+      "limite": "[4.5 - 10.0]"
     },
-    "parametros": [
-        {
-            "nombre": "Leucocitos",
-            "resultado": 5.9
-        }
-    ]
+    {
+      "nombre": "Eritrocitos", 
+      "resultado": 4.82, 
+      "unidad": "10^6/µL",
+      "limite": "[4.3 - 5.8]"
+    },
+    {
+      "nombre": "Hemoglobina", 
+      "resultado": 14.2, 
+      "unidad": "g/dL",
+      "limite": "[12.0 - 16.0]"
+    },
+    {
+      "nombre": "Hematocrito", 
+      "resultado": 42.5, 
+      "unidad": "%", 
+      "limite": "[36.0 - 46.0]"
+    },
+    {
+      "nombre": "Plaquetas", 
+      "resultado": 210, 
+      "unidad": "10^3/µL",
+      "limite": "[150 - 400]", 
+      "nota": "+"
+    }
+  ],
+  "firma": {
+    "responsable": "Q.F.B. Alejandra Ruiz Salgado",
+    "cedula": "09874563"
+  }
 }'''
 
 
