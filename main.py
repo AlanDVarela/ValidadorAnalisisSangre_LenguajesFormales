@@ -8,6 +8,13 @@ def validar_semantica(data):
 
     errores_encontrados = []  # Lista para acumular todos los errores
 
+    # Validacion folio
+    folio = data.get("folio")
+    if folio is None:
+        errores_encontrados.append("✖ Error estructural: Falta el campo 'folio'.")
+    elif not str(folio).isdigit():
+        errores_encontrados.append(f"✖ Error de formato: El folio '{folio}' debe ser numérico y sin espacios.")
+    
     #Validacion fechas 
     fechas_ok = True
     dt_toma = None
@@ -47,19 +54,53 @@ def validar_semantica(data):
 
     # Edad vs nacimiento
     if "paciente" in data:
+        #Validar nombre, texto,espacios, sin numeros
+        nombre_pac = data["paciente"].get("nombre")
+        if not re.match(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s\,]+$", str(nombre_pac)):
+            errores_encontrados.append(f"✖ Error semántico: El nombre del paciente '{nombre_pac}' no es válido (solo se permiten letras y comas).")
+
         str_nac = data["paciente"].get("fecha_nacimiento")
         edad_reportada = data["paciente"].get("edad")
+        #Validar edad positivo
+        val_edad = None # Variable auxiliar para guardar la edad limpia
+
+        # Validar que la edad es numero y positiva
+        if edad_reportada is not None:
+            try:
+                val_edad = float(edad_reportada)
+                
+                if val_edad < 0:
+                    errores_encontrados.append(f"✖ Error lógico: La edad '{edad_reportada}' no puede ser negativa.")
+                    val_edad = None 
+                elif val_edad > 120:
+                    errores_encontrados.append(f"    ⚠ Advertencia: La edad '{edad_reportada}' es inusualmente alta.")
+            except (ValueError, TypeError):
+                errores_encontrados.append(f"✖ Error de formato: La edad '{edad_reportada}' debe ser un número.")
+        
+        # 2. Validar fecha nacimiento y cruzar con edad (si la edad era válida)
         if str_nac:
             try:
                 dt_nacimiento = datetime.strptime(str_nac, "%d/%m/%Y")
-                if dt_toma and edad_reportada is not None:
-                    edad_real = dt_toma.year - dt_nacimiento.year - ((dt_toma.month, dt_toma.day) < (dt_nacimiento.month, dt_nacimiento.day))
-                    if int(edad_reportada) != edad_real:
-                        errores_encontrados.append(f"✖ Error lógico: La edad declarada ({edad_reportada}) no coincide con la fecha de nacimiento ({edad_real} años).")
+                
+                if dt_toma and val_edad is not None:
+                    #Edad real
+                    edad_calculada = dt_toma.year - dt_nacimiento.year - ((dt_toma.month, dt_toma.day) < (dt_nacimiento.month, dt_nacimiento.day))
+                    
+                    # Comparamos (convertimos val_edad a int para ignorar decimales ej: 25.0 == 25)
+                    if int(val_edad) != edad_calculada:
+                        errores_encontrados.append(f"✖ Error lógico: La edad declarada ({int(val_edad)}) no coincide con la fecha de nacimiento ({edad_calculada} años).")
                         fechas_ok = False
+
             except ValueError:
                 errores_encontrados.append(f"✖ Error de formato: 'fecha_nacimiento' ({str_nac}) debe ser 'dd/mm/yyyy'.")
                 fechas_ok = False
+
+        #Validar sexo
+        sexo_reportado = data["paciente"].get("sexo")
+    
+        # M o F
+        if sexo_reportado not in ["M", "F"]:
+            errores_encontrados.append(f"✖ Error semántico: Sexo '{sexo_reportado}' no válido. Debe ser 'M' o 'F'.")
 
     if fechas_ok:
         print("✔ Fechas correctas y lógicas.")
@@ -134,12 +175,19 @@ def cargar_y_validar(nombre_archivo):
     print(f"Validando archivo: {nombre_archivo}")
     print("-" * 43)
 
+
+    lexer.error = False
     try:
         with open(nombre_archivo, 'r', encoding='utf-8') as archivo:
             contenido = archivo.read()
             
             resultado = parser.parse(contenido)
             
+            if lexer.error: 
+                print("\n✖ El análisis se detuvo debido a errores léxicos (caracteres inválidos).")
+                return
+
+
             if not resultado:
                 print("✖ Error en la estructura general")
             else:

@@ -91,7 +91,7 @@ def t_STRING(t):
     r'"[^"]*"'
     val_clean = t.value.strip('"')
     # Checamos si es una palabra reservada
-    t.type = reserved.get(val_clean, 'STRING') #CADENA defecto
+    t.type = reserved.get(val_clean.lower(), 'STRING') #CADENA defecto
     t.value = val_clean
     return t
 
@@ -103,12 +103,15 @@ def t_NUMBER(t):
         t.value = int(t.value)
     #print(f"→ Reconocí un NUMBER: {t.value}")
     return t
+
 # Caracteres que vamos a ignorar (tabulares, espacios, saltos de linea)
 t_ignore = ' \t\n'
 
+
 # Caracteres ilegales
 def t_error(t):
-    print(f" ERROR LEXICO: Carácter '{t.value[0]}' no válido")  # Imprime el carácter ilegal
+    print(f"✖ Error lexico: Carácter '{t.value[0]}' no válido.")  # Imprime el carácter ilegal
+    t.lexer.error = True
     t.lexer.skip(1)  # Salta el carácter ilegal
 
 # Lexer

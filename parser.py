@@ -193,9 +193,9 @@ def p_error(p):
 
     error_sintactico_detectado = True
     if p:
-        print(f"EError sintáctico en:{p.value}'")  # Imprime el token donde ocurrió el error
+        print(f"✖ Error sintáctico en: {p.value}")  # Imprime el token donde ocurrió el error
     else:
-        print("Error sintáctico en EOF")  # Indica un error al final de la entrada
+        print("✖ Error sintáctico en EOF")  # Indica un error al final de la entrada
 
 # Construccion analizador sintactico
 parser = yacc.yacc() #se crea instancia del analizador sintáctico
