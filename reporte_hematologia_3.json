@@ -1,30 +1,25 @@
 {
-  "folio": "999999",
-  "fecha_toma": "01/01/2025 10:00:00",
-  "fecha_validacion": "01/01/2025 12:00:00",
+  "folio": "ABC-Error",
+  "fecha_toma": "14/06/2022 10:00:00",
+  "fecha_validacion": "14/06/2020 10:00:00",
   "paciente": {
-    "nombre": "Prueba de Errores",
-    "fecha_nacimiento": "01/01/2001",
-    "sexo": "M",
-    "edad": 24
+    "nombre": "Juan Perez",
+    "fecha_nacimiento": "01/01/2022",
+    "sexo": "X",
+    "edad": 50
   },
+  "medico_solicitante": "Dr. House",
   "seccion": "Química Sanguínea",
   "parametros": [
     {
-      "nombre": "Leucocitos",
-      "resultado": 5.0,
-      "unidad": "10^3/µL",
-      "limite": "4.5 - 10.0"
-    },
-    {
-      "nombre": "Colesterol",
-      "resultado": 180,
-      "unidad": "mg/dL",
-      "limite": "[0 - 200]"
+      "nombre": "Colesterol", 
+      "resultado": 250, 
+      "unidad": "mg/dL", 
+      "limite": "100-200"
     }
   ],
   "firma": {
-    "responsable": "Q.F.B. Test",
+    "responsable": "Q.F.B. Alejandra",
     "cedula": "12334568"
   }
 }

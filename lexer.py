@@ -110,9 +110,10 @@ t_ignore = ' \t\n'
 
 # Caracteres ilegales
 def t_error(t):
-    print(f"✖ Error lexico: Carácter '{t.value[0]}' no válido.")  # Imprime el carácter ilegal
+    msg = (f"✖ Error lexico: Carácter '{t.value[0]}' no válido.\n"
+           "✖ El análisis se detuvo debido a errores léxicos (caracteres inválidos).")
     t.lexer.error = True
-    t.lexer.skip(1)  # Salta el carácter ilegal
-
+    # Detenemos el lexer/parseo lanzando una excepción clara
+    raise SyntaxError(msg)
 # Lexer
 lexer = lex.lex() # Se crea instancia del analizador léxico

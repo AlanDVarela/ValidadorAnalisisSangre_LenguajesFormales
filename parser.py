@@ -129,7 +129,7 @@ def p_par(p):
     '''par : clave COLON valor'''
     p[0] = {p[1]: p[3]} #dict {'clave' : 'valor'}
 
-# Palabras reservadas (No terminales)
+# Palabras reservadas (Terminales)
 def p_clave(p):
     '''clave : FOLIO
              | FECHA_TOMA
@@ -173,7 +173,7 @@ def p_elementos(p):
         p[1].append(p[3])
         p[0] = p[1]
 
-# Valores 
+# Valorr
 def p_valor(p):
     '''valor : STRING
              | NUMBER

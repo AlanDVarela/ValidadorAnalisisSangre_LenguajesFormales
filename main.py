@@ -180,13 +180,22 @@ def cargar_y_validar(nombre_archivo):
     try:
         with open(nombre_archivo, 'r', encoding='utf-8') as archivo:
             contenido = archivo.read()
-            
-            resultado = parser.parse(contenido)
-            
-            if lexer.error: 
-                print("\n✖ El análisis se detuvo debido a errores léxicos (caracteres inválidos).")
+
+            try:
+                resultado = parser.parse(contenido)
+            except SyntaxError as e:
+                # Error léxico reportado desde t_error
+                print(str(e))
+                return
+            except Exception as e:
+                # Otros errores durante el parseo
+                print(f"✖ Error inesperado durante el parseo: {e}")
                 return
 
+            # Si el lexer marcó error por otro camino (por precaución)
+            if getattr(lexer, "error", False):
+                print("✖ El análisis se detuvo debido a errores léxicos (caracteres inválidos).")
+                return
 
             if not resultado:
                 print("✖ Error en la estructura general")
