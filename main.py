@@ -3,17 +3,12 @@ from parser import parser
 from datetime import datetime
 import re
 
-# ==========================================
-# 1. FUNCIÓN DE VALIDACIÓN SEMÁNTICA
-# ==========================================
+# Validacion semantica
 def validar_semantica(data):
-    """
-    Aplica las reglas de negocio y genera el reporte con el formato
-    exacto solicitado en el PDF (Pag. 4).
-    """
+
     errores_encontrados = []  # Lista para acumular todos los errores
 
-    # B. VALIDACIÓN DE FECHAS Y COHERENCIA TEMPORAL
+    #Validacion fechas 
     fechas_ok = True
     dt_toma = None
     dt_validacion = None
@@ -83,34 +78,34 @@ def validar_semantica(data):
             if nombre not in validos_biometria:
                 errores_encontrados.append(f"✖ Error semántico: '{nombre}' no pertenece a la sección 'Biometría Hemática'.")
             
+
             limite_str = param.get("limite", "")
             resultado = param.get("resultado")
 
-            # 1. Validar formato visual del límite "[min - max]" o "[min max]"
-            # El PDF pide validar formato 
-            if not (limite_str.startswith("[") and limite_str.endswith("]")):
-                 errores_encontrados.append(f"✖ Error de formato: El límite '{limite_str}' en '{nombre}' no tiene corchetes [ ].")
-            else:
-                # 2. Intentar parsear los números para validar rango clínico 
-                try:
-                    # Quitamos corchetes y reemplazamos guion por espacio para separar fácil
-                    # Esto maneja tanto "[4.5 - 10]" como "[4.5 10]"
-                    contenido_limite = limite_str.replace("[", "").replace("]", "").replace("-", " ")
-                    partes = contenido_limite.split()
-                    
-                    if len(partes) == 2:
-                        min_val = float(partes[0])
-                        max_val = float(partes[1])
-                        val_resultado = float(resultado)
+            # validacion limite [min - max]
+            patron = r"^\[\s*(-?\d+(?:\.\d+)?)\s*-\s*(-?\d+(?:\.\d+)?)\s*\]$"
 
-                        #Validar resultados dentro del rango de limite
-                        if not (min_val <= val_resultado <= max_val):
-                            print(f"    ⚠ Alerta clínica: '{nombre}' ({val_resultado}) está fuera del rango normal {limite_str}")
-                    else:
-                        errores_encontrados.append(f"✖ Error de formato: El límite '{limite_str}' no contiene dos valores numéricos.")
+            match = re.match(patron, limite_str)
+
+            if not match:
+                errores_encontrados.append(f"✖ Error de formato: El límite '{limite_str}' no cumple con el formato '[min - max]'.")
+
+            else:
+                #validacion resultados vs limites
+                try:
+                    min_val = float(match.group(1))
+                    max_val = float(match.group(2))
+                    val_resultado = float(resultado)
+
+                    # Validar si está fuera de rango
+                    if not (min_val <= val_resultado <= max_val):
+                        print(f"    ⚠ Alerta clínica: '{nombre}' ({val_resultado}) está fuera del rango normal {limite_str}")
+
                 except ValueError:
-                    errores_encontrados.append(f"✖ Error semántico: No se pudieron comparar los valores numéricos en '{nombre}'.")
+                    errores_encontrados.append(f"✖ Error semántico: El resultado '{resultado}' no es numérico, no se puede comparar.")
             
+
+            #Validacion nota
             if "nota" in param and param["nota"] not in ["*", "**", "+"]:
                 errores_encontrados.append(f"✖ Error de formato: Nota '{param['nota']}' inválida.")
 
@@ -123,7 +118,7 @@ def validar_semantica(data):
 
     # Imprimir todos los errores al final
     if errores_encontrados:
-        print("\nErrores semánticos detectados:")
+        #print("\nErrores semánticos detectados:")
         for e in errores_encontrados:
             print(e)
         print(f"✔ Archivo verificado con {len(errores_encontrados)} observaciones/advertencias.")
@@ -135,10 +130,7 @@ def validar_semantica(data):
 
 # Carga de archivo
 def cargar_y_validar(nombre_archivo):
-    """
-    Carga el archivo y muestra el encabezado solicitado.
-    """
-    # ENCABEZADO EXACTO DEL PDF [cite: 121]
+    
     print(f"Validando archivo: {nombre_archivo}")
     print("-" * 43)
 
@@ -146,7 +138,6 @@ def cargar_y_validar(nombre_archivo):
         with open(nombre_archivo, 'r', encoding='utf-8') as archivo:
             contenido = archivo.read()
             
-            # Ejecutar Parser (Sintaxis)
             resultado = parser.parse(contenido)
             
             if not resultado:
@@ -159,6 +150,7 @@ def cargar_y_validar(nombre_archivo):
         print(f"✖ Error: El archivo '{nombre_archivo}' no existe.")
     except Exception as e:
         print(f"✖ Error inesperado: {e}")
+
 
 #Ejecucion
 if __name__ == "__main__":

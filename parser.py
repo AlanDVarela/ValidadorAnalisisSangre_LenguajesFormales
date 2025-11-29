@@ -30,7 +30,7 @@ def p_inicio(p):
     obligatorios = ["folio", "fecha_toma", "fecha_validacion", "paciente", "seccion", "parametros", "firma"]
     for campo in obligatorios:
         if campo not in doc:
-            print(f"✖ ERROR SINTACTICO ESTRUCTURAL: Falta la sección/campo obligatorio '{campo}'")
+            print(f"✖ Error sintáctico: Falta la sección/campo obligatorio '{campo}'")
             es_valido = False 
 
     # paciente debe ser objeto y contener nombre, sexo, edad
@@ -42,7 +42,7 @@ def p_inicio(p):
         else:
             for i in ["nombre", "sexo", "edad"]:
                 if i not in paciente:
-                    print(f"✖ ERROR SINTACTICO ESTRUCTURAL: Falta 'paciente.{i}'")
+                    print(f"✖ Error sintáctico:  Falta 'paciente.{i}'")
                     es_valido = False
 
    # firma debe ser objeto y contener responsable y cedula
@@ -54,7 +54,7 @@ def p_inicio(p):
         else:
             for i in ["responsable", "cedula"]:
                 if i not in firma:
-                    print(f"✖ ERROR SINTACTICO ESTRUCTURAL: Falta 'firma.{i}'")
+                    print(f"✖ Error sintáctico: Falta 'firma.{i}'")
                     es_valido = False
 
     # Validar parametros
@@ -64,7 +64,7 @@ def p_inicio(p):
             print("✖ ERROR: 'parametros' debe ser una lista.")
             es_valido = False
         elif len(params) == 0:
-            print("✖ ERROR SINTÁCTICO: La sección 'parametros' existe pero está vacía ([]). Debe contener resultados.")
+            print("✖ Error sintáctico:  La sección 'parametros' existe pero está vacía []. Debe contener resultados.")
             es_valido = False
         else:
             for i, parametro in enumerate(params):
@@ -75,7 +75,7 @@ def p_inicio(p):
                 # dentro de la lista 
                 for req in ["nombre", "resultado", "unidad", "limite"]:
                     if req not in parametro:
-                        print(f"✖ ERROR SINTACTICO ESTRUCTURAL: Falta '{req}' en parametros[{i}]")
+                        print(f"✖ Error sintáctico: Falta '{req}' en parametros[{i}]")
                         es_valido = False
 
     # Salida
@@ -111,14 +111,14 @@ def p_miembros(p):
         if isinstance(par, dict) and len(par) == 1: #Validar que par es un dict, y tenga clave,valor
             key = next(iter(par.keys())) #Extraemos key y buscamos si hay duplicado
             if key in acum:
-                print(f"✖ ERROR SINTACTICO: Clave duplicada detectada en objeto: '{key}'")
+                print(f"✖ Error sintáctico: Clave duplicada detectada en objeto: '{key}'")
                 error_sintactico_detectado = True
             acum.update(par)
         else: #Par no es un dict o no es un dict valido
             try:
                 acum.update(par) #intenta hacer update
             except Exception:
-                msg = f"✖ ERROR SINTACTICO: Formato inesperado al agregar par: {par}"
+                msg = f"✖ Error sintáctico: Formato inesperado al agregar par: {par}"
                 print(msg)
                 error_sintactico_detectado = True
         p[0] = acum #dict acumulado
@@ -193,9 +193,9 @@ def p_error(p):
 
     error_sintactico_detectado = True
     if p:
-        print(f"ERROR SINTACTICO EN :{p.value}'")  # Imprime el token donde ocurrió el error
+        print(f"EError sintáctico en:{p.value}'")  # Imprime el token donde ocurrió el error
     else:
-        print("ERROR SINTACTICO EN EOF")  # Indica un error al final de la entrada
+        print("Error sintáctico en EOF")  # Indica un error al final de la entrada
 
 # Construccion analizador sintactico
 parser = yacc.yacc() #se crea instancia del analizador sintáctico

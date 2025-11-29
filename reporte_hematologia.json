@@ -37,7 +37,7 @@
     },
     {
       "nombre": "Plaquetas", 
-      "resultado": 210, 
+      "resultado": 150, 
       "unidad": "10^3/µL",
       "limite": "[150 - 400]", 
       "nota": "+"
